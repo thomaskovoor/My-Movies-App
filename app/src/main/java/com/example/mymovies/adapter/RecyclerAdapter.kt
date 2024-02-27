@@ -46,6 +46,7 @@ class RecyclerAdapter(private val context: Context): RecyclerView.Adapter<Recycl
         val movieLanguage:TextView = view.findViewById(R.id.movieLanguage)
         val movieYear:TextView = view.findViewById(R.id.movieYear)
         val movieImage:ImageView = view.findViewById(R.id.movieImage)
+        val shareButton:ImageView = view.findViewById(R.id.shareButton)
 
         fun bind(movie: Result){
 
@@ -59,10 +60,27 @@ class RecyclerAdapter(private val context: Context): RecyclerView.Adapter<Recycl
 
             Picasso.get().load(imageUrl).into(movieImage)
 
+
             movieTitle.text = movie.title
             movieRating.text = movie.vote_average.toString()
             movieLanguage.text = movie.original_language
             movieYear.text = movie.release_date
+
+
+            shareButton.setOnClickListener {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, "Hey, check out this movie: ${movie.title}\n" +
+                            "Rating: ${movie.vote_average}\n" +
+                            "Language: ${movie.original_language}\n" +
+                            "Year: ${movie.release_date}\n\n" +
+                            "https://www.themoviedb.org/movie/${movie.id}")
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                itemView.context.startActivity(shareIntent)
+            }
 
         }
 
