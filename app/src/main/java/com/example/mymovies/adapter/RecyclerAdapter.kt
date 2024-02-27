@@ -1,6 +1,7 @@
 package com.example.mymovies.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovies.R
 import com.example.mymovies.dataclass.Result
+import com.example.mymovies.ui.MovieDetailsActivity
 import com.squareup.picasso.Picasso
 
 
@@ -45,8 +47,13 @@ class RecyclerAdapter(private val context: Context): RecyclerView.Adapter<Recycl
         val movieYear:TextView = view.findViewById(R.id.movieYear)
         val movieImage:ImageView = view.findViewById(R.id.movieImage)
 
-
         fun bind(movie: Result){
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, MovieDetailsActivity::class.java)
+                intent.putExtra("movie", movie)
+                itemView.context.startActivity(intent)
+            }
 
             val imageUrl = "https://image.tmdb.org/t/p/w500" + movie.poster_path
 

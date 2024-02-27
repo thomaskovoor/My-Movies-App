@@ -7,15 +7,20 @@
     tools:context=".ui.MovieDetailsActivity">
 
     <ImageView
-        android:layout_marginTop="100dp"
         android:id="@+id/movieImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="80dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/movieTitle"
+        android:padding="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -24,6 +29,7 @@
 
     <TextView
         android:id="@+id/movieOverview"
+        android:padding="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
@@ -31,40 +37,44 @@
 
     <TextView
         android:id="@+id/movieReleaseDate"
+        android:padding="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/movieOverview" />
 
 
+    <TextView
+        android:id="@+id/movieLanguage"
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/movieReleaseDate" />
 
-        <TextView
-            android:id="@+id/movieLanguage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/movieReleaseDate" />
+    <TextView
+        android:id="@+id/moviePopularity"
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/movieLanguage" />
 
-        <TextView
-            android:id="@+id/moviePopularity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/movieLanguage" />
+    <TextView
+        android:id="@+id/movieVoteAverage"
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/moviePopularity" />
 
-        <TextView
-            android:id="@+id/movieVoteAverage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/moviePopularity" />
-
-        <TextView
-            android:id="@+id/movieVoteCount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/movieVoteAverage" />
+    <TextView
+        android:id="@+id/movieVoteCount"
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/movieVoteAverage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

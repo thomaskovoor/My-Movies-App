@@ -8,4 +8,14 @@
     <string name="movie_rating">Movie Rating</string>
     <string name="movie_language">Movie Language</string>
     <string name="movie_year">Movie Year</string>
+
+
+        <string name="release_date">Release Date: %s</string>
+        <string name="language">Language: %s</string>
+        <string name="popularity">Popularity: %s</string>
+        <string name="vote_average">Vote Average: %s</string>
+        <string name="vote_count">Vote Count: %s</string>
+
+
+
 </resources>
