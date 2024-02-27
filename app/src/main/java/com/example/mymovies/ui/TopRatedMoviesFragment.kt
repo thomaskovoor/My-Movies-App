@@ -17,6 +17,7 @@ class TopRatedMoviesFragment : Fragment() {
 
 
     private lateinit var recyclerAdapter : RecyclerAdapter
+    private var pageNum = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +29,7 @@ class TopRatedMoviesFragment : Fragment() {
         val viewModel = ViewModelProvider(this)[TopRatedMoviesViewModel::class.java]
 
 
-        viewModel.fetchMovies()
+        viewModel.fetchMovies(pageNum)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.topRecView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -40,6 +41,20 @@ class TopRatedMoviesFragment : Fragment() {
             recyclerAdapter.setMovieList(it)
             recyclerAdapter.notifyDataSetChanged()
         }
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val totalItemCount = layoutManager.itemCount
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+
+                if (totalItemCount <= lastVisibleItem+2) {
+                    pageNum++
+                    viewModel.fetchMovies(pageNum)
+                }
+            }
+        })
 
 
 

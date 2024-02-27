@@ -18,12 +18,12 @@ class TopRatedMoviesViewModel: ViewModel(){
     private val _moviesLiveData = MutableLiveData<List<Result>>()
     var moviesLiveData = _moviesLiveData
 
-    fun fetchMovies() = viewModelScope.launch {
+    fun fetchMovies(pageNum:Int) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             val client = OkHttpClient()
 
             val request = Request.Builder()
-                .url("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1")
+                .url("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=$pageNum")
                 .get()
                 .addHeader("accept", "application/json")
                 .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYWUxYTNkODA0YTk5ZDZhMjY1ZjBmZTA3OTUwMjc1OCIsInN1YiI6IjY1ZGQ5ZjJmODlkOTdmMDE2Mzk4YWFiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WacJ1JJU5MzFJ_AMl-XSlfvQD7-VLIu6OG0Wtv5QTqI")

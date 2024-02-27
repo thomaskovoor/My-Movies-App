@@ -2,11 +2,14 @@ package com.example.mymovies.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovies.R
 import com.example.mymovies.dataclass.Result
@@ -16,10 +19,11 @@ import com.squareup.picasso.Picasso
 
 class RecyclerAdapter(private val context: Context): RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
 
-    private var MovieList : MutableList<Result>?=null
+    private var movieList : MutableList<Result> = mutableListOf()
 
     fun setMovieList(movies: List<Result>){
-        this.MovieList = movies.toMutableList()
+        this.movieList.addAll(movies)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,15 +32,13 @@ class RecyclerAdapter(private val context: Context): RecyclerView.Adapter<Recycl
     }
 
     override fun getItemCount(): Int {
-        return MovieList?.size ?: 0
+           return movieList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie = MovieList?.get(position)
+        val movie = movieList[position]
 
-        if (movie != null) {
-            holder.bind(movie)
-        }
+        holder.bind(movie)
     }
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -48,7 +50,13 @@ class RecyclerAdapter(private val context: Context): RecyclerView.Adapter<Recycl
         val movieImage:ImageView = view.findViewById(R.id.movieImage)
         val shareButton:ImageView = view.findViewById(R.id.shareButton)
 
+
+
         fun bind(movie: Result){
+
+            val color = ContextCompat.getColor(itemView.context, R.color.black)
+            val colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+            shareButton.colorFilter = colorFilter
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, MovieDetailsActivity::class.java)
